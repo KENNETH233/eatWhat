@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 // import './App.css';
 
+const dishes = [1, 2, 3, 4]
+
 const AppWrapper = styled.div`
   background:black;
   display: flex;
@@ -44,18 +46,69 @@ const FunctionPage = styled.div`
   flex-direction: column;
 `
 
+const NaviBoxes = styled. div`
+  display: flex;
+  flex-direction: row;
+`
+
+const LikesLibrary = styled. button`
+  width: 45vw;
+  height: 10vh;
+`
+
+const HateLibrary = styled. button`
+  width: 45vw;
+  height: 10vh;
+`
+
+
 const ChoicesBox = styled.div`
     display:flex;
     flex-direction:column
     width:100vw;
-    height:100vh;
+    height:25vh;
     background:black;
     justify-content:center;
     align-item:center;
 `
 const Choices = styled.div`
-    
+    display: flex;
+    flex-direction: row;
+    // background: white;
 `
+
+const ChoicesDescription = styled.div`
+     display: flex;
+     flex-direction: column;
+     margin-left: auto;
+     background:blue;
+     padding:5px;
+`
+
+const ViewMoreButton = styled. button`
+      background:white;
+      width:10vw;
+      height:20vh;
+`
+
+const ButtonBoxes = styled.div`
+    diplay:flex;
+    flex-direction: row;
+    height: 10wh;
+    background white;
+`
+
+const YesButton = styled.button`
+    background:black;
+    text-align: center;
+    width:50vw;
+`
+const NoButton = styled.button`
+    background:black;
+    text-align: center;
+    width:50vw;
+`
+
 
 function App() {
   return (
@@ -80,17 +133,51 @@ function LandingPage() {
     );
   } else {
     return (
-      <MainFunction />
+      <div>
+      <Navi/>
+      <RunMainFunction/>
+      </div>
     );
   }
 }
 
-function MainFunction() {
+function RunMainFunction() {
+  return ( 
+    dishes.map(mainFunction)
+  );
+}
+
+function mainFunction() {
   return (
     <ChoicesBox>
-      <Title>Test</Title>
+      <Choices>
+        <Title>Images</Title>
+
+        <ChoicesDescription>
+          <Title> Description </Title>
+          <Title> Types </Title>
+        </ChoicesDescription>
+
+        <ViewMoreButton> View more </ViewMoreButton>
+      </Choices>
+
+      <ButtonBoxes>
+        <YesButton>✌️</YesButton>
+        <NoButton> ❌</NoButton>
+      </ButtonBoxes>  
+
+
     </ChoicesBox>
       );
     }
     
+function Navi(){
+  return(
+    <NaviBoxes>
+      <Title> eatWhat </Title>
+      <LikesLibrary>Likes</LikesLibrary>
+      <HateLibrary>Hates</HateLibrary>
+    </NaviBoxes>  
+  );
+}
     export default App;
