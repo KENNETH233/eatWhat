@@ -2,7 +2,79 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 // import './App.css';
 
-const dishes = [1, 2, 3, 4]
+// const DEFAULT = [
+//   {
+//     dish: "Thai Food",
+//     // images: "".
+//     description: "Curry and Tom Yam Gong",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "Dim Sum",
+//     // images: "".
+//     description: "Shrimps dumplings, Chicken feets",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "Hotpots",
+//     // images: "".
+//     description: "Sichuan style, Spicy",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "McDonalds",
+//     // images: "".
+//     description: "Western fast food, Burgers",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "Sushi",
+//     // images: "".
+//     description: "Japanese food, Sushi",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "Fish and Chips",
+//     // images: "".
+//     description: "British food, Western food",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "Steak",
+//     // images: "".
+//     description: "Best steak in Shanghai",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "Papa John",
+//     // images: "".
+//     description: "Pizza, Western fast",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "American BBQ",
+//     // images: "".
+//     description: "American style BBQ",
+//     filtered: "false"
+//   },
+
+//   {
+//     dish: "Korean Fried Chicken",
+//     // images: "".
+//     description: "Korean style, Fried Chicken",
+//     filtered: "false"
+//   },
+// ]
+
+const dishes = [1, 2, 3]
 
 const AppWrapper = styled.div`
   background:black;
@@ -46,17 +118,17 @@ const FunctionPage = styled.div`
   flex-direction: column;
 `
 
-const NaviBoxes = styled. div`
+const NaviBoxes = styled.div`
   display: flex;
   flex-direction: row;
 `
 
-const LikesLibrary = styled. button`
+const LikesLibrary = styled.button`
   width: 45vw;
   height: 10vh;
 `
 
-const HateLibrary = styled. button`
+const HateLibrary = styled.button`
   width: 45vw;
   height: 10vh;
 `
@@ -74,7 +146,6 @@ const ChoicesBox = styled.div`
 const Choices = styled.div`
     display: flex;
     flex-direction: row;
-    // background: white;
 `
 
 const ChoicesDescription = styled.div`
@@ -85,7 +156,7 @@ const ChoicesDescription = styled.div`
      padding:5px;
 `
 
-const ViewMoreButton = styled. button`
+const ViewMoreButton = styled.button`
       background:white;
       width:10vw;
       height:20vh;
@@ -99,16 +170,25 @@ const ButtonBoxes = styled.div`
 `
 
 const YesButton = styled.button`
-    background:black;
+    background:white;
     text-align: center;
     width:50vw;
 `
 const NoButton = styled.button`
-    background:black;
+    background:white;
     text-align: center;
     width:50vw;
 `
 
+const ShowMore = styled.button`
+    background: white;
+    text-aligh: center;
+    width: 100vw;
+    height:10vh;
+    border-style:solid;
+    border-radius:20px;
+    font-size:40px;
+`
 
 function App() {
   return (
@@ -134,18 +214,24 @@ function LandingPage() {
   } else {
     return (
       <div>
-      <Navi/>
-      <RunMainFunction/>
+        <Navi />
+        <RunMainFunction />
+        <ShowMore>Show more choices</ShowMore>
       </div>
     );
   }
 }
 
+// This is the componets to run three times
+
 function RunMainFunction() {
-  return ( 
+  return (
     dishes.map(mainFunction)
   );
 }
+
+
+// This is the function showing one choice
 
 function mainFunction() {
   return (
@@ -164,20 +250,21 @@ function mainFunction() {
       <ButtonBoxes>
         <YesButton>✌️</YesButton>
         <NoButton> ❌</NoButton>
-      </ButtonBoxes>  
+      </ButtonBoxes>
 
 
     </ChoicesBox>
-      );
-    }
-    
-function Navi(){
-  return(
-    <NaviBoxes>
-      <Title> eatWhat </Title>
-      <LikesLibrary>Likes</LikesLibrary>
-      <HateLibrary>Hates</HateLibrary>
-    </NaviBoxes>  
   );
 }
-    export default App;
+
+// This is navigation bar which should be run all the time
+function Navi() {
+  return (
+    <NaviBoxes>
+      <Title> eatWhat </Title>
+      <LikesLibrary>Likes Library</LikesLibrary>
+      <HateLibrary>Hates Library</HateLibrary>
+    </NaviBoxes>
+  );
+}
+export default App;
