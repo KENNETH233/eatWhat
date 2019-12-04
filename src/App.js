@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Popup from "reactjs-popup";
 import { DEFAULT_ECDH_CURVE } from 'tls';
 import './App.css';
 
@@ -75,7 +76,7 @@ const DEFAULT = [
   },
 ]
 
-let rand = DEFAULT[Math.floor(Math.random()*DEFAULT.length)];
+let rand = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
 console.log(rand);
 
 const dishes = [1, 2, 3]
@@ -207,7 +208,7 @@ function App() {
 
 function LandingPage() {
   const [click, setClick] = useState(0);
-  // const [chosen,setChosen] = useState([]);
+
 
   if (click === 0) {
     return (
@@ -217,7 +218,7 @@ function LandingPage() {
           <AppDescription>Filter what you do not want when ordering Waimai </AppDescription>
           <StartButton onClick={() => setClick(click + 1)}>
             Show some choices :)
-      </StartButton>
+           </StartButton>
         </LandingWrapper>
       </AppWrapper>
     );
@@ -226,11 +227,12 @@ function LandingPage() {
       <div>
         <Navi />
         <RunMainFunction />
-        <ShowMore onClick={RunMainFunction}>Show more choices</ShowMore>
+        <ShowMore>Show more choices</ShowMore>
       </div>
     );
   }
 }
+
 
 
 // This is the componets to run three times
@@ -241,26 +243,25 @@ function RunMainFunction() {
   initialChosen[1] = getNextRandomDish(initialChosen);
   initialChosen[2] = getNextRandomDish(initialChosen);
 
-  const [chosen,setChosen] = useState(initialChosen);
+  const [chosen, setChosen] = useState(initialChosen);
 
   return (
     <>
-      <MainFunction 
-        chosen={chosen} 
+      <MainFunction
+        chosen={chosen}
         setChosen={setChosen}
         dish={DEFAULT[initialChosen[0]]}
       />
-      <MainFunction 
-        chosen={chosen} 
+      <MainFunction
+        chosen={chosen}
         setChosen={setChosen}
         dish={DEFAULT[initialChosen[1]]}
-
       />
-      <MainFunction 
-        chosen={chosen} 
+      <MainFunction
+        chosen={chosen}
         setChosen={setChosen}
         dish={DEFAULT[initialChosen[2]]}
-    // chosen={chosen} setChosen={setChosen} 不会
+      // chosen={chosen} setChosen={setChosen} 不会
       />
     </>
   );
@@ -276,11 +277,11 @@ function getNextRandomDish(chosen) {
   let first = -1;
   let exist = false;
   do {
-    
-    first = Math.floor(Math.random()*DEFAULT.length);
+
+    first = Math.floor(Math.random() * DEFAULT.length);
 
     exist = chosen.indexOf(first) >= 0; // 这个不会
-  
+
   } while (exist);
 
   return first;
@@ -312,7 +313,7 @@ function MainFunction(props) {
       </ButtonBoxes>
 
     </ChoicesBox>
-    
+
   );
 }
 
@@ -326,4 +327,19 @@ function Navi() {
     </NaviBoxes>
   );
 }
+
+function like(number){
+  DEFAULT[number].filtered = "true"
+}
+
+// const View = () => (
+//   <Popup trigger={<button> View More </button>} modal>
+//     {close => (
+//       <button>Turn to Waimai App?</button>
+//       <button onClick={() => { close(); }}>No!</button>
+//      )
+//     }
+//   </Popup>
+// );
+
 export default App;
