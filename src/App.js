@@ -1,3 +1,7 @@
+// Npm Libraries citation: 
+// 1. Styled-components library
+// 2. Popup window library https://react-popup.elazizi.com/use-case---modal
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Popup from "reactjs-popup";
@@ -75,11 +79,6 @@ const DEFAULT = [
     filtered: "false"
   },
 ]
-
-let rand = DEFAULT[Math.floor(Math.random() * DEFAULT.length)];
-console.log(rand);
-
-const dishes = [1, 2, 3]
 
 // const LIKES = [];
 // const HATES = [];
@@ -227,7 +226,7 @@ function LandingPage() {
       <div>
         <Navi />
         <RunMainFunction />
-        <ShowMore>Show more choices</ShowMore>
+        {/* <ShowMore onClick={}>Show more choices</ShowMore> */}
       </div>
     );
   }
@@ -238,32 +237,44 @@ function LandingPage() {
 // This is the componets to run three times
 
 function RunMainFunction() {
+
+  function handleClick(){
+    let display = [];
+    display[0] = getNextRandomDish(initialChosen);
+    display[1] = getNextRandomDish(initialChosen);
+    display[2] = getNextRandomDish(initialChosen);  
+
+    setState({
+      chosen: state.chosen.concat(display),
+      display: display,
+    });
+  }
+
+
+
   let initialChosen = [];
   initialChosen[0] = getNextRandomDish(initialChosen);
   initialChosen[1] = getNextRandomDish(initialChosen);
   initialChosen[2] = getNextRandomDish(initialChosen);
 
-  const [chosen, setChosen] = useState(initialChosen);
+  const [state, setState] = useState({chosen: initialChosen, display: initialChosen});
 
   return (
-    <>
-      <MainFunction
-        chosen={chosen}
-        setChosen={setChosen}
-        dish={DEFAULT[initialChosen[0]]}
-      />
-      <MainFunction
-        chosen={chosen}
-        setChosen={setChosen}
-        dish={DEFAULT[initialChosen[1]]}
-      />
-      <MainFunction
-        chosen={chosen}
-        setChosen={setChosen}
-        dish={DEFAULT[initialChosen[2]]}
-      // chosen={chosen} setChosen={setChosen} 不会
-      />
-    </>
+    <div>
+      <>
+        <MainFunction
+          dish={DEFAULT[state.display[0]]}
+        />
+        <MainFunction
+          dish={DEFAULT[state.display[1]]}
+        />
+        <MainFunction
+          dish={DEFAULT[state.display[2]]}
+        // chosen={chosen} setChosen={setChosen} 不会
+        />
+      </>
+      <ShowMore onClick={handleClick}>Show more choices</ShowMore>
+    </div>
   );
 }
 
@@ -303,8 +314,9 @@ function MainFunction(props) {
           <Title> {props.dish.dish} </Title>
           <Title> {props.dish.description} </Title>
         </ChoicesDescription>
-
-        <ViewMoreButton> View more </ViewMoreButton>
+        
+        <View/>
+        {/* <ViewMoreButton onClick={View}> View more </ViewMoreButton> */}
       </Choices>
 
       <ButtonBoxes>
@@ -328,18 +340,22 @@ function Navi() {
   );
 }
 
-function like(number){
+function like(number) {
   DEFAULT[number].filtered = "true"
 }
 
-// const View = () => (
-//   <Popup trigger={<button> View More </button>} modal>
-//     {close => (
-//       <button>Turn to Waimai App?</button>
-//       <button onClick={() => { close(); }}>No!</button>
-//      )
-//     }
-//   </Popup>
-// );
+
+
+const View = () => (
+  <Popup trigger={<button> View More </button>} modal>
+    {close => (
+      <div className="flexView">
+      <button className="ViewMore">Turn to Waimai App?</button>
+      <button className="ViewMore" onClick={() => { close(); }}>No!</button>
+      </div>
+     )
+    }
+  </Popup>
+);
 
 export default App;
