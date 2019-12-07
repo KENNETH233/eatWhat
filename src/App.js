@@ -312,9 +312,9 @@ function RunMainFunction() {
     //   }while(exist)
     // }
     console.log(display)
-    display[0] = getNextRandomDish(initialChosen);
-    display[1] = getNextRandomDish(initialChosen);
-    display[2] = getNextRandomDish(initialChosen);  
+    display[0] = getNextRandomDish(display);
+    display[1] = getNextRandomDish(display);
+    display[2] = getNextRandomDish(display);  
 
     setState({
       chosen: state.chosen.concat(display),
