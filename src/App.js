@@ -80,8 +80,8 @@ const DEFAULT = [
   },
 ]
 
-// const LIKES = [];
-// const HATES = [];
+const LIKES = [];
+const HATES = [];
 
 const AppWrapper = styled.div`
   background: rgb(218, 201, 166)
@@ -258,7 +258,9 @@ const DislikeAdd = styled.img`
     width:30px;
     height:30px;
 `
-
+// const TrashPop = styled.div`
+//     width:  
+// `
 
 function App() {
   return (
@@ -298,7 +300,7 @@ function LandingPage() {
 
 function RunMainFunction() {
 
-  function handleClick(){
+  function handleClick() {
     let display = [];
 
     // display[0] = getNextRandomDish(initialChosen);
@@ -314,7 +316,7 @@ function RunMainFunction() {
     console.log(display)
     display[0] = getNextRandomDish(display);
     display[1] = getNextRandomDish(display);
-    display[2] = getNextRandomDish(display);  
+    display[2] = getNextRandomDish(display);
 
     setState({
       chosen: state.chosen.concat(display),
@@ -331,7 +333,7 @@ function RunMainFunction() {
   initialChosen[2] = getNextRandomDish(initialChosen);
   console.log(initialChosen);
 
-  const [state, setState] = useState({chosen: initialChosen, display: initialChosen});
+  const [state, setState] = useState({ chosen: initialChosen, display: initialChosen });
 
   return (
     <div>
@@ -375,28 +377,37 @@ function getNextRandomDish(chosen) {
 // This is the function showing one choice
 
 function MainFunction(props) {
-
+  console.log(LIKES);
+  console.log(HATES);
   console.log(props);
+
+  function addLike() {
+    LIKES.push(props.dish);
+  }
+
+  function addHate() {
+    HATES.push(props.dish);
+  }
 
   return (
     <ChoicesBox>
       <Choices>
-          <img className="foodimage"src={props.dish.images}></img>   
+        <img className="foodimage" src={props.dish.images}></img>
 
         <ChoicesDescription>
           <DishTitle> {props.dish.dish} </DishTitle>
           <Description> {props.dish.description} </Description>
         </ChoicesDescription>
-        
-        <View className="button"/>
+
+        <View className="button" />
       </Choices>
 
       <ButtonBoxes>
-        <Button>
-          <img  className="chooseButton" src="https://cdn3.iconfinder.com/data/icons/interface/100/add_button_2-512.png"/>
+        <Button onClick={addLike}>
+          <img className="chooseButton" src="https://cdn3.iconfinder.com/data/icons/interface/100/add_button_2-512.png" />
         </Button>
-        <Button> 
-          <img className="chooseButton" src="https://img.icons8.com/carbon-copy/100/000000/filled-trash.png"/>
+        <Button onClick={addHate}>
+          <img className="chooseButton" src="https://img.icons8.com/carbon-copy/100/000000/filled-trash.png" />
         </Button>
       </ButtonBoxes>
 
@@ -410,21 +421,69 @@ function Navi() {
   return (
     <NaviBoxes>
       <AppTitle> eatWhat </AppTitle>
-      <Library> <img className="Libraries" src="https://cdn4.iconfinder.com/data/icons/shopping-21/64/shopping-01-512.png"/></Library>
-      <Library> <img className="Libraries"src="https://cdn2.iconfinder.com/data/icons/cleaning-19/30/30x30-10-512.png"/></Library>
+      {/* <Library> <img className="Libraries" src="https://cdn4.iconfinder.com/data/icons/shopping-21/64/shopping-01-512.png" /></Library>
+      <Library> <img className="Libraries" src="https://cdn2.iconfinder.com/data/icons/cleaning-19/30/30x30-10-512.png" /></Library> */}
+      <Cart />
+      <Trash />
     </NaviBoxes>
   );
 }
 
 
 const View = () => (
-  <Popup trigger={<button className="v"> <img className="dots"src="https://icon-library.net/images/view-more-icon/view-more-icon-1.jpg"/> </button>} modal>
+  <Popup trigger={<button className="v"> <img className="dots" src="https://icon-library.net/images/view-more-icon/view-more-icon-1.jpg" /> </button>} modal>
     {close => (
       <div className="flexView">
-      <button className="ViewMore">Turn to Waimai App?</button>
-      <button className="ViewMore" onClick={() => { close(); }}>No!</button>
+        <button className="ViewMore">Turn to Waimai App?</button>
+        <button className="ViewMore" onClick={() => { close(); }}>No!</button>
       </div>
-     )
+    )
+    }
+  </Popup>
+);
+
+
+
+const Cart = () => (
+  <Popup trigger={<Library> <img className="Libraries" src="https://cdn4.iconfinder.com/data/icons/shopping-21/64/shopping-01-512.png" /> </Library>} modal>
+    {close => (
+      <Choices>
+        <img className="foodimage" src={LIKES.images}></img>
+
+        <ChoicesDescription>
+          <DishTitle> {LIKES.dish} </DishTitle>
+          <Description> {LIKES.description} </Description>
+        </ChoicesDescription>
+
+      </Choices>
+    )
+    }
+  </Popup>
+);
+
+
+
+function showTrash() {
+  return (
+    <div>
+      <Choices>
+        <img className="foodimage" src={HATES.images}></img>
+
+        <ChoicesDescription>
+          <DishTitle> {HATES.dish} </DishTitle>
+          <Description> {HATES.description} </Description>
+        </ChoicesDescription>
+
+      </Choices>
+    </div>
+  )
+}
+
+const Trash = () => (
+  <Popup trigger={<Library> <img className="Libraries" src="https://cdn2.iconfinder.com/data/icons/cleaning-19/30/30x30-10-512.png" /> </Library>} modal>
+    {close => (
+      HATES.map(showTrash)
+    )
     }
   </Popup>
 );
