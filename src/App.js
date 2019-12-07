@@ -11,70 +11,70 @@ import './App.css';
 const DEFAULT = [
   {
     dish: "Thai Food",
-    // images: "".
+    images: "https://www.englishclub.com/images/vocabulary/food/thai/thai-food.jpg",
     description: "Curry and Tom Yam Gong",
     filtered: "false"
   },
 
   {
     dish: "Dim Sum",
-    // images: "".
+    images: "http://www.dimsumcentral.com/wp-content/uploads/2018/06/what-is-dim-sum-header-new.jpg",
     description: "Shrimps dumplings, Chicken feets",
     filtered: "false"
   },
 
   {
     dish: "Hotpots",
-    // images: "".
+    images: "https://assets3.thrillist.com/v1/image/2774281/size/tl-full_width_tall_mobile.jpg",
     description: "Sichuan style, Spicy",
     filtered: "false"
   },
 
   {
     dish: "McDonalds",
-    // images: "".
+    images: "http://www.mcdonalds.ie/content/iehome/food/_jcr_content/genericpagecontent/everything/image.img.png/1548671028500.png",
     description: "Western fast food, Burgers",
     filtered: "false"
   },
 
   {
     dish: "Sushi",
-    // images: "".
+    images: "https://cdn11.bigcommerce.com/s-y80oldc1cd/images/stencil/1280x1280/products/559/907/Sushi_Combo_Large__14936.1537475468.jpg?c=2&imbypass=on",
     description: "Japanese food, Sushi",
     filtered: "false"
   },
 
   {
     dish: "Fish and Chips",
-    // images: "".
+    images: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Fish_and_chips_blackpool.jpg/1200px-Fish_and_chips_blackpool.jpg",
     description: "British food, Western food",
     filtered: "false"
   },
 
   {
     dish: "Steak",
-    // images: "".
+    images: "https://images.pitboss-grills.com/catalog/recipes/1200px/Reverse-Seared-NY-Steak.jpg",
     description: "Best steak in Shanghai",
     filtered: "false"
   },
 
   {
-    dish: "Papa John",
-    // images: "".
+    dish: "Papa Johns",
+    images: "https://hip2save.com/wp-content/uploads/2016/11/papa-john.jpg?resize=1024%2C538&strip=all",
     description: "Pizza, Western fast",
     filtered: "false"
   },
 
   {
     dish: "American BBQ",
-    // images: "".
+    images: "https://previews.123rf.com/images/rez_art/rez_art1903/rez_art190300069/118469063-texas-style-bbq-meal-with-all-the-fixings.jpg",
     description: "American style BBQ",
     filtered: "false"
   },
 
   {
     dish: "Korean Fried Chicken",
-    // images: "".
+    images: "https://timeincsecure-a.akamaihd.net/rtmp_uds/429048911/201908/1954/429048911_6078004776001_6078001885001-vs.jpg?pubId=429048911&videoId=6078001885001",
     description: "Korean style, Fried Chicken",
     filtered: "false"
   },
@@ -84,7 +84,7 @@ const DEFAULT = [
 // const HATES = [];
 
 const AppWrapper = styled.div`
-  background:white;
+  background: rgb(218, 201, 166)
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,15 +94,48 @@ const AppWrapper = styled.div`
 const LandingWrapper = styled.div`
   display:flex;
   flex-direction:column;
-  background:lightgrey;
+  background:rgb(218, 201, 166);
   justify-content: center;
   align-content: center
   height:100vh;
 `
 
+const AppTitle = styled.h1`
+  text-align: center;
+  color: black;
+  font-family: 'Sulphur Point', sans-serif;
+`
+
 const Title = styled.h1`
   text-align: center;
   color: black;
+  font-family: 'Sulphur Point', sans-serif;
+  @media only screen and (max-width:600px){
+    font-size: 11px;
+    font-weight: normal;
+    }
+  
+`
+const Description = styled.h2`
+  text-align: center;
+  color: black; 
+  font-family: 'Sulphur Point', sans-serif;
+  @media only screen and (max-width:600px){
+    font-size: 15px;
+    font-weight: normal;
+    }
+  
+`
+
+const DishTitle = styled.h1`
+  text-align: center;
+  color: black;
+  font-size:40px;
+  font-family: 'Sulphur Point', sans-serif;
+  @media only screen and (max-width:600px){
+    font-size: 18px;
+    }
+  
 `
 
 const StartButton = styled.button`
@@ -114,80 +147,95 @@ const StartButton = styled.button`
   height:10vh;
   margin-left:auto;
   margin-right:auto;
+  font-family: 'Sulphur Point', sans-serif;
+  font-size:15px;
 `
 
 const AppDescription = styled.h2`
     text-align: center;
+    font-family: 'Sulphur Point', sans-serif;
     color: black;
-`
-const FunctionPage = styled.div`
-  display:flex;
-  flex-direction: column;
 `
 
 const NaviBoxes = styled.div`
   display: flex;
   flex-direction: row;
+  border-bottom:solid;
+  border-bottom-color:lightgrey;
 `
 
-const LikesLibrary = styled.button`
-  width: 45vw;
-  height: 10vh;
-`
 
-const HateLibrary = styled.button`
+const Library = styled.button`
   width: 45vw;
-  height: 10vh;
+  height: 9vh;
+  border-style:solid;
+  border-color:white;
+  border-radius:20px;
+  background-color:white;
+  font-family: 'Sulphur Point', sans-serif;
+  @media only screen and (max-width:600px){
+    width: 45vw;
+    height:auto;
+    }
 `
 
 const ChoicesBox = styled.div`
     display:flex;
     flex-direction:column
     width:100vw;
-    height:25vh;
-    background:lightgrey;
+    height:24vh;
+    border-bottom:solid;
+    border-color:lightgrey;
+    border-bottom-weight:2px;
     justify-content:center;
     align-item:center;
+    @media only screen and (max-width:600px){
+      height: auto;
+      margin: 5px;
+      }
+  
 `
 const Choices = styled.div`
     display: flex;
     flex-direction: row;
-    border-style:solid;
+    height: 15vh;
+    @media only screen and (max-width:600px){
+      font-size: 11px;
+      height:10vh;
+      }
 `
 
 const ChoicesDescription = styled.div`
      display: flex;
      flex-direction: column;
-     margin-left: auto;
-     background:lightgrey;
+     background: white;
      padding:5px;
-     border-style:solid
      width:500px;
+     font-family: 'Sulphur Point', sans-serif;
+     @media only screen and (max-width:600px){
+      
+      border: none;
+      }
 `
 
-const ViewMoreButton = styled.button`
-      background:white;
-      width:10vw;
-      height:20vh;
-`
 
 const ButtonBoxes = styled.div`
     diplay:flex;
     flex-direction: row;
+    // flex-wrap:wrap;
     height: 10wh;
-    background white;
+    background-color: white;
 `
 
-const YesButton = styled.button`
+const Button = styled.button`
     background:white;
     text-align: center;
+    border-style:none;
     width:50vw;
+    height: 40px;
+    font-family: 'Sulphur Point', sans-serif;
 `
-const NoButton = styled.button`
-    background:white;
-    text-align: center;
-    width:50vw;
-`
+
 
 const ShowMore = styled.button`
     background: white;
@@ -197,7 +245,25 @@ const ShowMore = styled.button`
     border-style:solid;
     border-radius:20px;
     font-size:40px;
+    font-family: 'Sulphur Point', sans-serif;
 `
+
+// const Image = styled.div`
+//     width:200px;
+//     height:150px;
+// `
+
+const LikesAdd = styled.img`
+    src: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStBGWeC5gkATsiXwYMTETG2tF5LxxrZZaLwYYSjHCRia-PbtK4&s");
+    width:30px;
+    height:30px;
+`
+const DislikeAdd = styled.img`
+    src: url("https://img.icons8.com/carbon-copy/100/000000/filled-trash.png");
+    width:30px;
+    height:30px;
+`
+
 
 function App() {
   return (
@@ -213,7 +279,7 @@ function LandingPage() {
     return (
       <AppWrapper>
         <LandingWrapper>
-          <Title>Eat What!</Title>
+          <AppTitle>Eat What!</AppTitle>
           <AppDescription>Filter what you do not want when ordering Waimai </AppDescription>
           <StartButton onClick={() => setClick(click + 1)}>
             Show some choices :)
@@ -223,10 +289,9 @@ function LandingPage() {
     );
   } else {
     return (
-      <div>
+      <div className="main">
         <Navi />
         <RunMainFunction />
-        {/* <ShowMore onClick={}>Show more choices</ShowMore> */}
       </div>
     );
   }
@@ -253,10 +318,11 @@ function RunMainFunction() {
 
 
   let initialChosen = [];
+
   initialChosen[0] = getNextRandomDish(initialChosen);
   initialChosen[1] = getNextRandomDish(initialChosen);
   initialChosen[2] = getNextRandomDish(initialChosen);
-
+ 
   const [state, setState] = useState({chosen: initialChosen, display: initialChosen});
 
   return (
@@ -270,7 +336,6 @@ function RunMainFunction() {
         />
         <MainFunction
           dish={DEFAULT[state.display[2]]}
-        // chosen={chosen} setChosen={setChosen} 不会
         />
       </>
       <ShowMore onClick={handleClick}>Show more choices</ShowMore>
@@ -308,20 +373,25 @@ function MainFunction(props) {
   return (
     <ChoicesBox>
       <Choices>
-        <Title>Images</Title>
+        {/* <Image>  */}
+          <img className="foodimage"src={props.dish.images}></img>   
+        {/* </Image> */}
 
         <ChoicesDescription>
-          <Title> {props.dish.dish} </Title>
-          <Title> {props.dish.description} </Title>
+          <DishTitle> {props.dish.dish} </DishTitle>
+          <Description> {props.dish.description} </Description>
         </ChoicesDescription>
         
-        <View/>
-        {/* <ViewMoreButton onClick={View}> View more </ViewMoreButton> */}
+        <View className="button"/>
       </Choices>
 
       <ButtonBoxes>
-        <YesButton>✌️</YesButton>
-        <NoButton> ❌</NoButton>
+        <Button>
+          <img  className="chooseButton" src="https://cdn3.iconfinder.com/data/icons/interface/100/add_button_2-512.png"/>
+        </Button>
+        <Button> 
+          <img className="chooseButton" src="https://img.icons8.com/carbon-copy/100/000000/filled-trash.png"/>
+        </Button>
       </ButtonBoxes>
 
     </ChoicesBox>
@@ -333,21 +403,16 @@ function MainFunction(props) {
 function Navi() {
   return (
     <NaviBoxes>
-      <Title> eatWhat </Title>
-      <LikesLibrary>Likes Library</LikesLibrary>
-      <HateLibrary>Hates Library</HateLibrary>
+      <AppTitle> eatWhat </AppTitle>
+      <Library> <img className="Libraries" src="https://cdn4.iconfinder.com/data/icons/shopping-21/64/shopping-01-512.png"/></Library>
+      <Library> <img className="Libraries"src="https://cdn2.iconfinder.com/data/icons/cleaning-19/30/30x30-10-512.png"/></Library>
     </NaviBoxes>
   );
 }
 
-function like(number) {
-  DEFAULT[number].filtered = "true"
-}
-
-
 
 const View = () => (
-  <Popup trigger={<button> View More </button>} modal>
+  <Popup trigger={<button className="v"> <img className="dots"src="https://icon-library.net/images/view-more-icon/view-more-icon-1.jpg"/> </button>} modal>
     {close => (
       <div className="flexView">
       <button className="ViewMore">Turn to Waimai App?</button>

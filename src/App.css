@@ -1,3 +1,11 @@
+@media only screen and (max-width:600px){
+.App{
+  font-size: 11px;
+  margin: 5px;
+}
+}
+
+
 .App {
   text-align: center;
 }
@@ -30,9 +38,49 @@
   border-color: grey;
   border-radius: 20px;
   margin: 20px;
+  background-color: antiquewhite;
 }
 
 .flexView{
   display: flex;
   flex-direction: space-between;
+}
+
+
+.foodimage{
+  width:175px;
+  height:125px;
+  vertical-align: center;
+}
+
+@media only screen and (max-width:600px){
+  .foodimage{
+    width:100px;
+    height:75px;
+  }
+  }
+  
+
+.button{
+  width:100px;
+}
+
+.dots{
+  width:50px;
+  height:50px;
+}
+
+.v{
+  background-color:white;
+  border-style: none;
+}
+
+.Libraries{
+  width: 40px;
+  height:40px;
+}  
+
+.chooseButton{
+  height:25px;
+  height:25px
 }
