@@ -190,7 +190,7 @@ const ChoicesBox = styled.div`
     justify-content:center;
     align-item:center;
     @media only screen and (max-width:600px){
-      height: auto;
+      height: 20vh;
       margin: 5px;
       }
   
@@ -201,7 +201,7 @@ const Choices = styled.div`
     height: 15vh;
     @media only screen and (max-width:600px){
       font-size: 11px;
-      height:10vh;
+      height:12vh;
       }
 `
 
@@ -213,7 +213,6 @@ const ChoicesDescription = styled.div`
      width:500px;
      font-family: 'Sulphur Point', sans-serif;
      @media only screen and (max-width:600px){
-      
       border: none;
       }
 `
@@ -248,10 +247,6 @@ const ShowMore = styled.button`
     font-family: 'Sulphur Point', sans-serif;
 `
 
-// const Image = styled.div`
-//     width:200px;
-//     height:150px;
-// `
 
 const LikesAdd = styled.img`
     src: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStBGWeC5gkATsiXwYMTETG2tF5LxxrZZaLwYYSjHCRia-PbtK4&s");
@@ -305,6 +300,18 @@ function RunMainFunction() {
 
   function handleClick(){
     let display = [];
+
+    // display[0] = getNextRandomDish(initialChosen);
+    // var i;
+    // for(i=1; i<4; i++){
+    //   let n = getNextRandomDish(display);
+    //   let exist = false;
+    //   do{
+    //     display[display.length] = n;
+    //     exist = display.indexOf(n) >= 0;
+    //   }while(exist)
+    // }
+    console.log(display)
     display[0] = getNextRandomDish(initialChosen);
     display[1] = getNextRandomDish(initialChosen);
     display[2] = getNextRandomDish(initialChosen);  
@@ -322,7 +329,8 @@ function RunMainFunction() {
   initialChosen[0] = getNextRandomDish(initialChosen);
   initialChosen[1] = getNextRandomDish(initialChosen);
   initialChosen[2] = getNextRandomDish(initialChosen);
- 
+  console.log(initialChosen);
+
   const [state, setState] = useState({chosen: initialChosen, display: initialChosen});
 
   return (
@@ -373,9 +381,7 @@ function MainFunction(props) {
   return (
     <ChoicesBox>
       <Choices>
-        {/* <Image>  */}
           <img className="foodimage"src={props.dish.images}></img>   
-        {/* </Image> */}
 
         <ChoicesDescription>
           <DishTitle> {props.dish.dish} </DishTitle>
