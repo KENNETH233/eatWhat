@@ -80,11 +80,14 @@ const DEFAULT = [
   },
 ]
 
-const LIKES = [];
-const HATES = [];
+let LIKES = [];
+let HATES = [];
+
+
+let TrashBin = [];
 
 const AppWrapper = styled.div`
-  background: rgb(218, 201, 166)
+  background: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,7 +97,7 @@ const AppWrapper = styled.div`
 const LandingWrapper = styled.div`
   display:flex;
   flex-direction:column;
-  background:rgb(218, 201, 166);
+  background: white;
   justify-content: center;
   align-content: center
   height:100vh;
@@ -106,16 +109,6 @@ const AppTitle = styled.h1`
   font-family: 'Sulphur Point', sans-serif;
 `
 
-const Title = styled.h1`
-  text-align: center;
-  color: black;
-  font-family: 'Sulphur Point', sans-serif;
-  @media only screen and (max-width:600px){
-    font-size: 11px;
-    font-weight: normal;
-    }
-  
-`
 const Description = styled.h2`
   text-align: center;
   color: black; 
@@ -127,10 +120,11 @@ const Description = styled.h2`
   
 `
 
+
 const DishTitle = styled.h1`
   text-align: center;
   color: black;
-  font-size:40px;
+  font-size:20px;
   font-family: 'Sulphur Point', sans-serif;
   @media only screen and (max-width:600px){
     font-size: 18px;
@@ -138,17 +132,41 @@ const DishTitle = styled.h1`
   
 `
 
+const DishTitleInList = styled.h2`
+  text-align: center;
+  color: black;
+  font-size:28px;
+  font-family: 'Sulphur Point', sans-serif;
+  @media only screen and (max-width:600px){
+    font-size: 15px;
+    }
+  
+`
+
+
 const StartButton = styled.button`
   border-style: solid;
-  background color: white;
+  background-color: white;
   color: black;
   border-radius: 20px;
-  width: 25vw;
+  width: 12vw;
   height:10vh;
   margin-left:auto;
   margin-right:auto;
   font-family: 'Sulphur Point', sans-serif;
   font-size:15px;
+  @media only screen and (max-width:600px){
+    border-style: solid;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    width: 25vw;
+    height:10vh;
+    margin-left:auto;
+    margin-right:auto;
+    font-family: 'Sulphur Point', sans-serif;
+    font-size:15px;
+  }
 `
 
 const AppDescription = styled.h2`
@@ -175,7 +193,7 @@ const Library = styled.button`
   font-family: 'Sulphur Point', sans-serif;
   @media only screen and (max-width:600px){
     width: 45vw;
-    height:auto;
+    height:10vh;
     }
 `
 
@@ -206,6 +224,8 @@ const Choices = styled.div`
 `
 
 const ChoicesDescription = styled.div`
+     margin-left:auto;
+     margin-right:auto;
      display: flex;
      flex-direction: column;
      background: white;
@@ -247,20 +267,15 @@ const ShowMore = styled.button`
     font-family: 'Sulphur Point', sans-serif;
 `
 
+const RemoveButton = styled.button`
+    width:30px;
+    height:30px;
+    background: white;
+    border-style: none;
+    margin-top:auto;
+    margin-bottom:auto;
+`
 
-const LikesAdd = styled.img`
-    src: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStBGWeC5gkATsiXwYMTETG2tF5LxxrZZaLwYYSjHCRia-PbtK4&s");
-    width:30px;
-    height:30px;
-`
-const DislikeAdd = styled.img`
-    src: url("https://img.icons8.com/carbon-copy/100/000000/filled-trash.png");
-    width:30px;
-    height:30px;
-`
-// const TrashPop = styled.div`
-//     width:  
-// `
 
 function App() {
   return (
@@ -299,21 +314,11 @@ function LandingPage() {
 // This is the componets to run three times
 
 function RunMainFunction() {
+  console.log(DEFAULT);
 
   function handleClick() {
     let display = [];
 
-    // display[0] = getNextRandomDish(initialChosen);
-    // var i;
-    // for(i=1; i<4; i++){
-    //   let n = getNextRandomDish(display);
-    //   let exist = false;
-    //   do{
-    //     display[display.length] = n;
-    //     exist = display.indexOf(n) >= 0;
-    //   }while(exist)
-    // }
-    console.log(display)
     display[0] = getNextRandomDish(display);
     display[1] = getNextRandomDish(display);
     display[2] = getNextRandomDish(display);
@@ -331,7 +336,6 @@ function RunMainFunction() {
   initialChosen[0] = getNextRandomDish(initialChosen);
   initialChosen[1] = getNextRandomDish(initialChosen);
   initialChosen[2] = getNextRandomDish(initialChosen);
-  console.log(initialChosen);
 
   const [state, setState] = useState({ chosen: initialChosen, display: initialChosen });
 
@@ -366,7 +370,7 @@ function getNextRandomDish(chosen) {
 
     first = Math.floor(Math.random() * DEFAULT.length);
 
-    exist = chosen.indexOf(first) >= 0; // 这个不会
+    exist = chosen.indexOf(first) >= 0;
 
   } while (exist);
 
@@ -377,9 +381,6 @@ function getNextRandomDish(chosen) {
 // This is the function showing one choice
 
 function MainFunction(props) {
-  console.log(LIKES);
-  console.log(HATES);
-  console.log(props);
 
   function addLike() {
     LIKES.push(props.dish);
@@ -387,7 +388,12 @@ function MainFunction(props) {
 
   function addHate() {
     HATES.push(props.dish);
+    var idx = DEFAULT.indexOf(props.dish);
+    TrashBin.push(DEFAULT[idx]);
+    DEFAULT.splice(idx,1);
   }
+
+  console.log(DEFAULT)
 
   return (
     <ChoicesBox>
@@ -421,8 +427,6 @@ function Navi() {
   return (
     <NaviBoxes>
       <AppTitle> eatWhat </AppTitle>
-      {/* <Library> <img className="Libraries" src="https://cdn4.iconfinder.com/data/icons/shopping-21/64/shopping-01-512.png" /></Library>
-      <Library> <img className="Libraries" src="https://cdn2.iconfinder.com/data/icons/cleaning-19/30/30x30-10-512.png" /></Library> */}
       <Cart />
       <Trash />
     </NaviBoxes>
@@ -444,45 +448,76 @@ const View = () => (
 
 
 
+
+
 const Cart = () => (
-  <Popup trigger={<Library> <img className="Libraries" src="https://cdn4.iconfinder.com/data/icons/shopping-21/64/shopping-01-512.png" /> </Library>} modal>
+  <Popup trigger={<Library> <img className="Libraries" src="https://image.flaticon.com/icons/png/512/126/126083.png" /> </Library>} modal>
     {close => (
-      <Choices>
-        <img className="foodimage" src={LIKES.images}></img>
-
-        <ChoicesDescription>
-          <DishTitle> {LIKES.dish} </DishTitle>
-          <Description> {LIKES.description} </Description>
-        </ChoicesDescription>
-
-      </Choices>
+      LIKES.map(showCart)
     )
     }
   </Popup>
 );
 
+function showCart(props) {
+  function removing() {
+    var idx = LIKES.indexOf(props);
+    LIKES.splice(idx,1);
+ }
 
-
-function showTrash() {
   return (
     <div>
       <Choices>
-        <img className="foodimage" src={HATES.images}></img>
+        <img className="foodimage" src={props.images}></img>
 
         <ChoicesDescription>
-          <DishTitle> {HATES.dish} </DishTitle>
-          <Description> {HATES.description} </Description>
+          <DishTitleInList> {props.dish} </DishTitleInList>
         </ChoicesDescription>
-
+        <RemoveButton onClick={removing}> <img className="removingImage" src="https://icons-for-free.com/iconfiles/png/512/circle+close+cross+delete+exit+remove+icon-1320085939591374353.png" /> </RemoveButton>
       </Choices>
     </div>
+  )
+
+}
+
+
+
+function ShowTrash(props) {
+  const [hide,setHide] = useState(false);
+
+  function removing() {
+    var idx = HATES.indexOf(props)
+    HATES.splice(idx,1);
+    setHide(true);
+    DEFAULT.push(TrashBin[idx]);
+    TrashBin.splice(idx,1);
+ }
+
+  return (
+      hide ? null : 
+      <div>
+        <Choices>
+          <img className="foodimage" src={props.images}></img>
+
+          <ChoicesDescription>
+            <DishTitleInList> {props.dish} </DishTitleInList>
+          </ChoicesDescription>
+
+          <RemoveButton onClick={removing}> <img className="removingImage" src="https://icons-for-free.com/iconfiles/png/512/circle+close+cross+delete+exit+remove+icon-1320085939591374353.png" /> </RemoveButton>
+        </Choices>
+      </div>
+    
   )
 }
 
 const Trash = () => (
   <Popup trigger={<Library> <img className="Libraries" src="https://cdn2.iconfinder.com/data/icons/cleaning-19/30/30x30-10-512.png" /> </Library>} modal>
     {close => (
-      HATES.map(showTrash)
+      HATES.map((item) => {
+        return (
+          <ShowTrash images={item.images} dish={item.dish}/>
+        )
+      })
     )
     }
   </Popup>
