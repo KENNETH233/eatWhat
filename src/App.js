@@ -314,7 +314,6 @@ function LandingPage() {
 // This is the componets to run three times
 
 function RunMainFunction() {
-  console.log(DEFAULT);
 
   function handleClick() {
     let display = [];
@@ -366,13 +365,16 @@ function getNextRandomDish(chosen) {
 
   let first = -1;
   let exist = false;
+  let hated;
+
   do {
 
     first = Math.floor(Math.random() * DEFAULT.length);
 
     exist = chosen.indexOf(first) >= 0;
 
-  } while (exist);
+    hated = HATES.indexOf(first) >= 0;
+  } while (exist || hated );
 
   return first;
 }
@@ -381,6 +383,9 @@ function getNextRandomDish(chosen) {
 // This is the function showing one choice
 
 function MainFunction(props) {
+    console.log("HATES",HATES);
+    console.log("TrashBin",TrashBin);
+    console.log("LIKES",LIKES);
 
   function addLike() {
     LIKES.push(props.dish);
@@ -486,11 +491,21 @@ function ShowTrash(props) {
   const [hide,setHide] = useState(false);
 
   function removing() {
-    var idx = HATES.indexOf(props)
+    // var itemsToRemove = HATES.filter((item) => {return item.dish === props.dish});
+    // console.log(itemsToRemove, idx, HATES);
+    // var itemToRemove = itemsToRemove[0];
+    // var idx = HATES.indexOf(itemToRemove);
+    var idx = HATES.findIndex(function(item){
+      return item.dish === props.dish;
+    });
     HATES.splice(idx,1);
+    console.log(HATES);
     setHide(true);
     DEFAULT.push(TrashBin[idx]);
+    console.log(HATES);
+    console.log(TrashBin);
     TrashBin.splice(idx,1);
+    console.log(HATES);
  }
 
   return (

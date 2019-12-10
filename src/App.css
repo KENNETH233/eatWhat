@@ -89,3 +89,7 @@
   width:30px;
   height:30px;
 }
+
+.popup-content {
+  width: 80%!important;
+}
