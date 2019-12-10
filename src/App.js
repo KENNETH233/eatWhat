@@ -230,7 +230,6 @@ const ChoicesDescription = styled.div`
      flex-direction: column;
      background: white;
      padding:5px;
-     width:500px;
      font-family: 'Sulphur Point', sans-serif;
      @media only screen and (max-width:600px){
       border: none;
@@ -458,19 +457,33 @@ const View = () => (
 const Cart = () => (
   <Popup trigger={<Library> <img className="Libraries" src="https://image.flaticon.com/icons/png/512/126/126083.png" /> </Library>} modal>
     {close => (
-      LIKES.map(showCart)
+      LIKES.map((item) =>{
+        return (
+          <ShowCart images={item.images} dish={item.dish}/>
+        )
+      })
     )
-    }
+   }
   </Popup>
 );
 
-function showCart(props) {
+function ShowCart(props) {
+  const [hide,setHide] = useState(false);
+
   function removing() {
-    var idx = LIKES.indexOf(props);
+    var idx = LIKES.findIndex(function(item){
+      return item.dish === props.dish;
+    });
     LIKES.splice(idx,1);
+    setHide(true);
+    DEFAULT.push(LIKES[idx]);
+
+
  }
 
+
   return (
+    hide ? null:
     <div>
       <Choices>
         <img className="foodimage" src={props.images}></img>
@@ -491,21 +504,13 @@ function ShowTrash(props) {
   const [hide,setHide] = useState(false);
 
   function removing() {
-    // var itemsToRemove = HATES.filter((item) => {return item.dish === props.dish});
-    // console.log(itemsToRemove, idx, HATES);
-    // var itemToRemove = itemsToRemove[0];
-    // var idx = HATES.indexOf(itemToRemove);
     var idx = HATES.findIndex(function(item){
       return item.dish === props.dish;
     });
     HATES.splice(idx,1);
-    console.log(HATES);
     setHide(true);
     DEFAULT.push(TrashBin[idx]);
-    console.log(HATES);
-    console.log(TrashBin);
     TrashBin.splice(idx,1);
-    console.log(HATES);
  }
 
   return (
