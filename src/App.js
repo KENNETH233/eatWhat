@@ -382,6 +382,8 @@ function getNextRandomDish(chosen) {
 // This is the function showing one choice
 
 function MainFunction(props) {
+
+  // const [hide,setHide] = useState(false);
     console.log("HATES",HATES);
     console.log("TrashBin",TrashBin);
     console.log("LIKES",LIKES);
@@ -391,15 +393,27 @@ function MainFunction(props) {
   }
 
   function addHate() {
-    HATES.push(props.dish);
-    var idx = DEFAULT.indexOf(props.dish);
-    TrashBin.push(DEFAULT[idx]);
-    DEFAULT.splice(idx,1);
+    
+    // setHide(true);
+
+    var idx = DEFAULT.findIndex(function(item){
+      console.log(item);
+      return item.dish === props.dish.dish;
+    })
+
+    if(DEFAULT[idx]){
+      HATES.push(props.dish);
+      console.log(props.dish);
+      // var idx = DEFAULT.indexOf(props.dish);
+      TrashBin.push(DEFAULT[idx]);
+      DEFAULT.splice(idx,1);
+    }
   }
 
   console.log(DEFAULT)
 
   return (
+    // hide ? null:
     <ChoicesBox>
       <Choices>
         <img className="foodimage" src={props.dish.images}></img>
@@ -413,12 +427,17 @@ function MainFunction(props) {
       </Choices>
 
       <ButtonBoxes>
+
         <Button onClick={addLike}>
           <img className="chooseButton" src="https://cdn3.iconfinder.com/data/icons/interface/100/add_button_2-512.png" />
         </Button>
+        
+        
+        
         <Button onClick={addHate}>
           <img className="chooseButton" src="https://img.icons8.com/carbon-copy/100/000000/filled-trash.png" />
         </Button>
+
       </ButtonBoxes>
 
     </ChoicesBox>
@@ -501,20 +520,20 @@ function ShowCart(props) {
 
 
 function ShowTrash(props) {
-  const [hide,setHide] = useState(false);
+  const [hide,setHide] = useState(false); //
 
   function removing() {
     var idx = HATES.findIndex(function(item){
       return item.dish === props.dish;
     });
     HATES.splice(idx,1);
-    setHide(true);
+    setHide(true); //
     DEFAULT.push(TrashBin[idx]);
     TrashBin.splice(idx,1);
  }
 
   return (
-      hide ? null : 
+      hide ? null :  //
       <div>
         <Choices>
           <img className="foodimage" src={props.images}></img>
