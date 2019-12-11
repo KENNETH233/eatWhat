@@ -500,6 +500,7 @@ function ShowCart(props) {
     });
     LIKES.splice(idx,1);
     setHide(true);
+    //
  }
 
 
