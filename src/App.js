@@ -1,6 +1,6 @@
 // Npm Libraries citation: 
 // 1. Styled-components library
-// 2. Popup window library https://react-popup.elazizi.com/use-case---modal
+// 2. Popup window library https://react-popup.elazizi.com/use-case---modal I follow the example code and do some modification. 
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -383,28 +383,24 @@ function getNextRandomDish(chosen) {
 
 function MainFunction(props) {
 
-  // const [hide,setHide] = useState(false);
     console.log("HATES",HATES);
     console.log("TrashBin",TrashBin);
     console.log("LIKES",LIKES);
 
   function addLike() {
-    // LIKES.push(props.dish);
-    var idx = DEFAULT.findIndex(function(item){
+    var idx = LIKES.findIndex(function(item){
       console.log(item);
       return item.dish === props.dish.dish;
     })
 
-    if(DEFAULT[idx]){
+    if(!LIKES[idx]){
       LIKES.push(props.dish);
       console.log(props.dish);
-      // var idx = DEFAULT.indexOf(props.dish);
     }
   }
 
   function addHate() {
     
-    // setHide(true);
 
     var idx = DEFAULT.findIndex(function(item){
       console.log(item);
@@ -414,7 +410,6 @@ function MainFunction(props) {
     if(DEFAULT[idx]){
       HATES.push(props.dish);
       console.log(props.dish);
-      // var idx = DEFAULT.indexOf(props.dish);
       TrashBin.push(DEFAULT[idx]);
       DEFAULT.splice(idx,1);
     }
