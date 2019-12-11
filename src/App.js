@@ -389,7 +389,17 @@ function MainFunction(props) {
     console.log("LIKES",LIKES);
 
   function addLike() {
-    LIKES.push(props.dish);
+    // LIKES.push(props.dish);
+    var idx = DEFAULT.findIndex(function(item){
+      console.log(item);
+      return item.dish === props.dish.dish;
+    })
+
+    if(DEFAULT[idx]){
+      LIKES.push(props.dish);
+      console.log(props.dish);
+      // var idx = DEFAULT.indexOf(props.dish);
+    }
   }
 
   function addHate() {
@@ -495,9 +505,6 @@ function ShowCart(props) {
     });
     LIKES.splice(idx,1);
     setHide(true);
-    DEFAULT.push(LIKES[idx]);
-
-
  }
 
 
